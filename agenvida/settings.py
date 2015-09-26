@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainApp',
-    'apprest',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +57,10 @@ ROOT_URLCONF = 'agenvida.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                BASE_DIR + '/templates/',
+                
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,10 +78,12 @@ WSGI_APPLICATION = 'agenvida.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-import dj_database_url
-DATABASES = {'default': dj_database_url.config()}
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -98,3 +103,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+
+ANONYMOUS_USER_ID = 1
+
