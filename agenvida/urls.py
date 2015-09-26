@@ -15,26 +15,34 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from mainApp.viewsets import PropositoViewSet, VinculacionViewSet,UserDetail, UserList
+from mainApp.viewsets import UserDetail, UserList
 from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 from mainApp import views
+from django.views.generic import View, TemplateView
 
 admin.autodiscover()
 
 
-router = DefaultRouter()
-router.register(r'propositos', PropositoViewSet)
-router.register(r'vinculaciones', VinculacionViewSet)
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^', include(router.urls)),
-    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+
+    
     url(r'^propositos2/$', views.PropositoList.as_view()),
     url(r'^propositos2/(?P<pk>[0-9]+)/$', views.PropositoDetail.as_view()),
+
+
+        url(r'^marcaciones2/$', views.MarcacionList.as_view()),
+    url(r'^marcaciones2/(?P<pk>[0-9]+)/$', views.MarcacionDetail.as_view()),
+
+    
+   
+
     url(r'^users/$', UserList.as_view()),
-url(r'^users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
 ]
 
 
@@ -46,6 +54,12 @@ urlpatterns += [
                                namespace='rest_framework')),
 ]
 
+
+
+urlpatterns += [
+url(r'^$',   TemplateView.as_view(template_name='base.html'), name="base"),
+
+]
 
 
 

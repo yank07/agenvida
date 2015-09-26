@@ -11,7 +11,7 @@ class Vinculacion(models.Model):
     vinculacion = models.CharField(max_length=50)
     
     def __unicode__(self):
-        return unicode(self.vinculacion)
+        return '%s' % (self.vinculacion)
     
 class Proposito(models.Model):
     usuario = models.ForeignKey(User,related_name='propositos' )
@@ -31,7 +31,7 @@ class Marcacion(models.Model):
    
    
     def __unicode__(self):
-        return unicode(self.cumplimiento)
+        return '%s' %(self.cumplimiento)
     
 class Tipo_marcacion(models.Model):
     tipo = models.CharField(max_length=50)

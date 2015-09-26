@@ -1,22 +1,35 @@
 from rest_framework import serializers
-from .models import Vinculacion, Proposito
+from .models import Vinculacion, Proposito, Marcacion
+from django.contrib.auth.models import User
  
-class VinculacionSerializer(serializers.ModelSerializer):
+
+class MarcacionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Vinculacion
-        fields = ('id', 'vinculacion',)
- 
+        model = Marcacion
+        #usuario = serializers.ReadOnlyField(source='usuario.username')
+
+        fields = ('id', 'dia', 'cumplimiento', 'proposito')
+
+
+
 class PropositoSerializer(serializers.ModelSerializer):
+    usuario = serializers.ReadOnlyField(source='usuario.username')
+    marcaciones = MarcacionSerializer(many=True,required=False)
+
     class Meta:
         model = Proposito
-        usuario = serializers.ReadOnlyField(source='usuario.username')
-        fields = ('id', 'mes_ano', 'proposito','usuario')
 
 
-from django.contrib.auth.models import User
+        fields = ('id', 'usuario', 'vinculacion', 'proposito', 'mes_ano',  'marcaciones')
+
+
+
+
+
+
 
 class UserSerializer(serializers.ModelSerializer):
-    propositos = serializers.PrimaryKeyRelatedField(many=True, queryset=Proposito.objects.all())
+    propositos = PropositoSerializer(many=True)
 
     class Meta:
         model = User
