@@ -83,9 +83,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd9iv5c6du1i6l7',
         'USER': 'njudcgherjulgk',
-            'PASSWORD': ' _K89Di-CfwDCVAYR49p2Ghn66_',
-            'HOST': 'ec2-54-197-253-142.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-            'PORT': '5432',         
+        'PASSWORD': '_K89Di-CfwDCVAYR49p2Ghn66_',
+        'HOST': 'ec2-54-197-253-142.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',         
     }
 }
 # Internationalization
