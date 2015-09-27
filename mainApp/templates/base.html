@@ -114,14 +114,16 @@
            
 
             <div class="ui accordion">
+
+              <vinculacion ng-repeat="vinculacion in vinculaciones">
               <div class="title">
                 <i class="dropdown icon"></i>
-                Con Dios
+                {$ vinculacion.nombre$}
               </div>
               <div class="content">
                 <ul class="transition propositos hidden">
 
-                  <li  ng-repeat="proposito in filtered =(propositos | filter:{ vinculacion: '1' , mes_ano: ano + '-'+ mes +'-' , }) " class="proposito">
+                  <li  ng-repeat="proposito in filtered =(propositos | filter:{ vinculacion: vinculacion.id , mes_ano: ano + '-'+ mes +'-' , }) " class="proposito">
 
 
                      
@@ -132,7 +134,7 @@
 
 
                             <!-- BOTONES CUANDO YA HAY MARCACION-->
-                            <div ng-repeat="marcacion in proposito.marcaciones | filter:{ dia: '-'+ dia , }" class = "right floated four wide column" >
+                            <div  class = "right floated four wide column" >
                               <button class="ui circular mini icon button" ng-class="{'green' : (proposito.marcaciones | filter:{ dia: dia, cumplimiento: 1 }).length != 0 } "  ng-click="call(proposito, 1 )" >
                                 <i class="add icon"></i>
                               </button>
@@ -145,40 +147,23 @@
                             </div>
 
 
-                            <!-- BOTONES CUANDO NO HAY MARCACION-->
-                            <div ng-hide="(proposito.marcaciones | filter:{ dia: dia }).length != 0" class = "right floated four wide column">
-                              <button class="ui circular mini icon button"  ng-click="call(proposito, 1)"  >
-                                <i class="add icon"></i>
-                              </button>
-                              <button class="ui circular mini icon button"  ng-click="call(proposito, 2)">
-                                <i class="minus icon"></i>
-                              </button>
-                              <button class="ui circular mini icon button"  ng-click="call(proposito, 0)">
-                                <i class="radi icon"></i>
-                              </button>
-                            </div>
-
 
                    
                              
 
                       </div>
-                      <ul ng-show="false"> <!-- SOLO PARA PRUEBAS -->
-                          <li ng-repeat="marcacion in proposito.marcaciones "  class="marcacion">
-                              {$marcacion.dia$} - {$ marcacion.cumplimiento$}                        
-                          </li>
-                      </ul> 
+        
                     </li>
 
                     <!-- UNA ENTRADA NUEVA -->
 
-                    <li ng-hide="showInput" class="inputProposito">
+                    <li ng-hide="showInput[vinculacion.id]" class="inputProposito">
 
-                    <form class="ui form" ng-submit="submitNuevoProposito(1)">
+                    <form class="ui form" ng-submit="submitNuevoProposito(vinculacion.id)">
 
                       <div class="ui transparent massive icon input">
-                        <input type="text" placeholder="Nuevo Proposito" ng-model="NuevoProposito">
-                        <i class="add link icon" ng-click="submitNuevoProposito(1)"></i>
+                        <input type="text" placeholder="Nuevo Proposito" ng-model="NuevoProposito[vinculacion.id]">
+                        <i class="add link icon" ng-click="submitNuevoProposito(vinculacion.id)"></i>
                       </div>
 
                     </form>
@@ -187,7 +172,7 @@
                     <!-- BOTON PARA  ENTRADA NUEVA -->
                     <li>
 
-                      <button class="ui circular mini icon button" ng-click="addPropositoInput()">
+                      <button class="ui circular mini icon button" ng-click="addPropositoInput(vinculacion.id)">
                                 <i class="add icon"></i>
                       </button>
 
@@ -196,76 +181,12 @@
 
                 </ul>
               </div>
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Con los demas
-              </div>
-              <div class="content">
-                        <ul class="transition hidden">
 
-                            <li  ng-repeat="proposito in propositos | filter:{ vinculacion: '2', mes_ano: dia }" class="proposito">
-                               
-                                <h2>{$proposito.proposito$} - {$proposito.mes_ano$}
-
-                                      <button class="ui circular mini icon button">
-                                        <i class="add icon"></i>
-                                      </button>
-                                      <button class="ui circular mini icon button">
-                                        <i class="minus icon"></i>
-                                      </button>
-                                      <button class="ui circular mini icon button">
-                                        <i class="radi icon"></i>
-                                      </button>
-                                </h2>
-                                <ul  ng-show="true">
-                                    <li ng-repeat="marcacion in proposito.marcaciones " class="marcacion">
-                                        {$marcacion.dia$} - {$ marcacion.cumplimiento$}
-
-                                    </li>
-
-                                </ul> 
-                              </li>
+            </vinculacion>
 
 
-                          </ul>
-                
-              </div>
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Conmigo
-              </div>
-              <div class="content">
-                      <ul class="transition hidden">
-
-                            <li  ng-repeat="proposito in propositos | filter:{ vinculacion: '2' , mes_ano: dia}" class="proposito">
-                               
-                                <h2>
-                                      {$proposito.proposito$} - {$proposito.mes_ano$}
-                                      <button class="ui circular mini icon button">
-                                        <i class="add icon"></i>
-                                      </button>
-                                      <button class="ui circular mini icon button">
-                                        <i class="minus icon"></i>
-                                      </button>
-                                      <button class="ui circular mini icon button">
-                                        <i class="radi icon"></i>
-                                      </button>
-
-                                </h2>
-                                <ul  ng-show="true">
-                                    <li ng-repeat="marcacion in proposito.marcaciones " class="marcacion">
-                                        {$marcacion.dia$} - {$ marcacion.cumplimiento$}
-
-                                    </li>
-
-                                </ul> 
-                              </li>
-
-
-                        </ul>
-              </div>
             </div>
-
+<!-- END Accordion -->
 
     </div>
 </div>

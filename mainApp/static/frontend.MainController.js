@@ -20,7 +20,11 @@ agenvidaApp.controller('PhoneListCtrl', ['$scope', '$http',
   $scope.dia = 25;
   $scope.mes = "09";
   $scope.ano = "2015";
-  $scope.showInput = true ;
+  $scope.showInput = [true, true, true, true] ;
+  $scope.NuevoProposito = ['','','',''];
+
+
+   $scope.vinculaciones = [{"id":1,"nombre":"Dios"}, {"id":2,"nombre":"conmigo"},{"id":3,"nombre":"Demas"}, ]
 
   getPropositos();
 
@@ -43,9 +47,9 @@ function searchFecha(dia, myArray){
       };
 
 
-  $scope.addPropositoInput = function(){ /* Cuando hago click en "+" de nuevo proposito */
+  $scope.addPropositoInput = function(vinculacion){ /* Cuando hago click en "+" de nuevo proposito */
 
-    $scope.showInput = false ;
+    $scope.showInput[vinculacion] = false ;
   }
 
 
@@ -95,16 +99,18 @@ function searchFecha(dia, myArray){
    $scope.submitNuevoProposito = function( vinculacion_id ){
 
     data ={
-      proposito: $scope.NuevoProposito,
+      proposito: $scope.NuevoProposito[vinculacion_id],
       mes_ano:  $scope.ano + "-" + $scope.mes + "-" + $scope.dia, /* CAmbiar por la fecha de hoy */
       vinculacion: vinculacion_id,
 
     }
+
+    console.log(data);
     $http.post('/propositos2/', data ).then(function(){
 
       getPropositos();
 
-      $scope.NuevoProposito = "";
+      $scope.NuevoProposito[vinculacion_id] = "";
       
 
     });
