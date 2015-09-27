@@ -3,10 +3,30 @@
 agenvidaApp.controller('PhoneListCtrl', ['$scope', '$http',
   
 
-  function ($scope, $http) {
+  function ($scope, $http ) {
+
+/*
+      $window.FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    $scope.facebook_token = response.authResponse.accessToken;
+  }
+});
+
+
+      $http.get('http://localhost:8000/propositos2', {
+    headers: {'Authorization': 'Bearer facebook' + $scope.facebook_token }
+}).then(function(result){
+  console.log('veniii');
+  console.log(result);
+});
+*/
+
+$http.defaults.headers.common['Authorization']= 'Bearer Am1yFBvVNeLmYkPQdpkdIvzdbvGoBY';
   
 
     getPropositos = function() { 
+
+    
 
       $http.get('/propositos2/').then(function(result){
                                                         $scope.propositos = result.data;
@@ -24,7 +44,7 @@ agenvidaApp.controller('PhoneListCtrl', ['$scope', '$http',
   $scope.NuevoProposito = ['','','',''];
 
 
-   $scope.vinculaciones = [{"id":1,"nombre":"Dios"}, {"id":2,"nombre":"conmigo"},{"id":3,"nombre":"Demas"}, ]
+   $scope.vinculaciones = [{"id":1,"nombre":"Dios"}, {"id":2,"nombre":"Conmigo"},{"id":3,"nombre":"Con los Demás"}, {"id":4,"nombre":"Con la Naturaleza"},] 
 
   getPropositos();
 

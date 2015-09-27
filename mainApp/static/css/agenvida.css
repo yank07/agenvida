@@ -32,3 +32,8 @@ ul.propositos {
 	    margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.addProposito {
+	  margin-top: 10px !important;
+    margin-bottom: 10px  !important;;
+}

@@ -29,7 +29,7 @@ class PropositoSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    propositos = PropositoSerializer(many=True)
+    #propositos = PropositoSerializer(many=True)
 
     class Meta:
         model = User

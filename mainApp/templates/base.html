@@ -3,7 +3,7 @@
  <html ng-app="agenvidaApp">
  <head>
      <meta charset="utf-8">
-     <title>Google Phone Gallery</title>
+     <title>Agenvida</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
     
  
@@ -25,7 +25,30 @@
     
  
  </head>
+
+
  <body ng-controller="PhoneListCtrl">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '524418254291199',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
     {% block content %}{% endblock content %}
 
  
@@ -34,7 +57,7 @@
 
 
   <div class="eight wide computer fourteen wide mobile tablet column centered ">
-        <h1>Agenvida 2.0  </h1>
+        <h1>Agenvida 2.0 <a href="{% url 'social:begin' 'facebook-oauth2' %}">Entrar con la cuenta de Google</a> </h1>
 
 
 
@@ -101,6 +124,8 @@
                                 <i class="calendar icon"></i>
                               </button>
                             </div>
+
+
 
   
                             
@@ -172,7 +197,7 @@
                     <!-- BOTON PARA  ENTRADA NUEVA -->
                     <li>
 
-                      <button class="ui circular mini icon button" ng-click="addPropositoInput(vinculacion.id)">
+                      <button class="ui circular mini icon button addProposito"  ng-click="addPropositoInput(vinculacion.id)">
                                 <i class="add icon"></i>
                       </button>
 
@@ -187,6 +212,8 @@
 
             </div>
 <!-- END Accordion -->
+
+
 
     </div>
 </div>
