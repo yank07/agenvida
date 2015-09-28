@@ -36,10 +36,20 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'mainApp',
     'rest_framework',
+    'oauth2_provider',
+    'social.apps.django_app.default',
+    'rest_framework_social_oauth2',
+    'corsheaders',
+
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+     # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    # ...
+
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -47,7 +57,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
 )
+
+# Esto sirve para que pueda hacer consultas desde otro dominio
+CORS_ORIGIN_REGEX_WHITELIST = ('^http://localhost:8100$', )
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'agenvida.urls'
 
@@ -65,6 +81,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -97,14 +116,51 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
+AUTHENTICATION_BACKENDS = (
+  
+
+     # Facebook OAuth2
+    'social.backends.facebook.FacebookAppOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
+
+    # django-rest-framework-social-oauth2
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+
+    # Django
+    'django.contrib.auth.backends.ModelBackend',
+  
+
+)
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',        
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
     ),
 }
 
 
+
 ANONYMOUS_USER_ID = 1
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope'}
+}
+
+SOCIAL_AUTH_FACEBOOK_KEY = '524418254291199'
+SOCIAL_AUTH_FACEBOOK_SECRET = '80587a95990df049b8208dd6e6e83faa'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'es_PY',
+  'fields': 'id, name, email, age_range'
+}
+
+
+LOGIN_REDIRECT_URL = '/'
+
