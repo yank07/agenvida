@@ -105,7 +105,8 @@ WSGI_APPLICATION = 'agenvida.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 import dj_database_url
-DATABASES =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
+DATABASES = dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
