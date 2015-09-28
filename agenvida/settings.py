@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'rest_framework_social_oauth2',
     'corsheaders',
 
+
+    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,6 +70,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'agenvida.urls'
+
 
 # Esto sirve para que pueda hacer consultas desde otro dominio
 CORS_ORIGIN_REGEX_WHITELIST = ('^http://localhost:8100$', )
@@ -101,8 +104,12 @@ WSGI_APPLICATION = 'agenvida.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -123,6 +130,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
+
 AUTHENTICATION_BACKENDS = (
   
 
@@ -138,7 +146,6 @@ AUTHENTICATION_BACKENDS = (
   
 
 )
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
