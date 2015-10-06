@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -63,7 +64,6 @@ MIDDLEWARE_CLASSES = (
 # Esto sirve para que pueda hacer consultas desde otro dominio
 CORS_ORIGIN_REGEX_WHITELIST = ('^http://localhost:8100$', )
 CORS_ALLOW_CREDENTIALS = True
-
 OAUTH_EXPIRE_DELTA = datetime.timedelta(days=365);
 
 
