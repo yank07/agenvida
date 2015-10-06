@@ -64,6 +64,8 @@ MIDDLEWARE_CLASSES = (
 CORS_ORIGIN_REGEX_WHITELIST = ('^http://localhost:8100$', )
 CORS_ALLOW_CREDENTIALS = True
 
+OAUTH_EXPIRE_DELTA = datetime.timedelta(days=365);
+
 
 ROOT_URLCONF = 'agenvida.urls'
 
