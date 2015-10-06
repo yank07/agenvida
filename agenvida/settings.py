@@ -64,7 +64,7 @@ MIDDLEWARE_CLASSES = (
 # Esto sirve para que pueda hacer consultas desde otro dominio
 CORS_ORIGIN_REGEX_WHITELIST = ('^http://localhost:8100$', )
 CORS_ALLOW_CREDENTIALS = True
-OAUTH_EXPIRE_DELTA = datetime.timedelta(days=365);
+OAUTH_EXPIRE_DELTA = 360000000 # 100.000 horas;
 
 
 ROOT_URLCONF = 'agenvida.urls'
