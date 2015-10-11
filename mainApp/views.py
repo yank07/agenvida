@@ -17,7 +17,9 @@ from rest_framework import permissions
 from mainApp.models import Proposito, Vinculacion, Marcacion
 from mainApp.permissions import IsOwnerOrReadOnly
 
-from mainApp.serializers import PropositoSerializer, MarcacionSerializer
+from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer
+
+from django.contrib.auth.models import User
 
 
 
@@ -146,3 +148,26 @@ class MarcacionList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)
+
+
+class UserList(APIView):
+    """
+    List all usuarios, or create a new marcacion.
+    """
+    permission_classes = (permissions.IsAuthenticated,)
+    def get(self, request, format=None):
+        users = User.objects.filter(id=request.user.id)
+        serializer = UserSerializer(users, many=True)
+        self.check_object_permissions(request, users)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = UserSerializer(data=request.data)
+       ## self.check_permissions(request)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def perform_create(self, serializer):
+        serializer.save()
+
