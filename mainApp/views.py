@@ -154,7 +154,7 @@ class UserList(APIView):
     """
     List all usuarios, or create a new marcacion.
     """
-    permission_classes = (permissions.IsAuthenticated,)
+   # permission_classes = (permissions.IsAuthenticated,)
     def get(self, request, format=None):
         users = User.objects.filter(id=request.user.id)
         serializer = UserSerializer(users, many=True)
