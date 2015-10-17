@@ -174,7 +174,7 @@ class UserList(APIView):
 
     def get(self, request, format=None):
         users = User.objects.filter(id=request.user.id)
-        serializer = UserSerializer(users, many=False)
+        serializer = UserSerializer(users, many=True)
         self.check_object_permissions(request, users)
         return Response(serializer.data)
 
