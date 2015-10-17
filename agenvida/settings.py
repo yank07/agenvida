@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default', #TOKEN SOCIAL
     'rest_framework_social_oauth2', #TOKEN SOCIAL
     'corsheaders', #Permite post de otros dominios
-    'djoser', # Rest authentication
+   
 
 )
 
