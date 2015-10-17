@@ -163,6 +163,15 @@ class UserList(APIView):
     List all usuarios, or create a new marcacion.
     """
     permission_classes = (permissions.IsAuthenticated,)
+    def get_object(self, user):
+        try:
+            obj = User.objects.get(user = user)
+        except User.DoesNotExist:       
+             obj = User.objects.create(user = user)
+            
+       
+        return obj
+
     def get(self, request, format=None):
         users = User.objects.filter(id=request.user.id)
         serializer = UserSerializer(users, many=True)
@@ -176,6 +185,16 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, format=None):
+        user = self.get_object( request.user)
+        self.check_object_permissions(request, user)
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def perform_create(self, serializer):
         serializer.save()
 

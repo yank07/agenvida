@@ -52,12 +52,14 @@ url(r'^auth/', include('rest_framework_social_oauth2.urls')),
 
    url(r'^userProfile/$', views.UserPerfilDetail.as_view()),
 
- 
+ url(r'^usuarios/$', views.UserList.as_view()),
     
    
 
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
+
+     url(r'^auth/', include('djoser.urls')),
 
   
 ]
