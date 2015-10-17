@@ -39,11 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainApp',
-    'rest_framework',
-    'oauth2_provider',
-    'social.apps.django_app.default',
-    'rest_framework_social_oauth2',
-    'corsheaders',
+    'rest_framework',#REST FRAMEWORK
+    'oauth2_provider', #TOKEN
+    'social.apps.django_app.default', #TOKEN SOCIAL
+    'rest_framework_social_oauth2', #TOKEN SOCIAL
+    'corsheaders', #Permite post de otros dominios
+    'djoser', # Rest authentication
 
 
     
@@ -179,3 +180,17 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 
 
 LOGIN_REDIRECT_URL = '/'
+
+DJOSER = {
+    'DOMAIN': 'agenvida.herokuapp.com',
+    'SITE_NAME': 'Agenvida',
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+}
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'agenvida@gmail.com'
+EMAIL_HOST_PASSWORD = 'horarioespiritual00'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

@@ -53,6 +53,8 @@ url(r'^auth/', include('rest_framework_social_oauth2.urls')),
 
     url(r'^users/$', UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
+
+     url(r'^auth/', include('djoser.urls')),
 ]
 
 
