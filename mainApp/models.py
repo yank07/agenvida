@@ -41,13 +41,28 @@ class Tipo_marcacion(models.Model):
     def __unicode__(self):
         return unicode(self.tipo)
     
+
+
+
+
+
+
+
+class UserPerfil(models.Model):
+    user = models.OneToOneField(User)
+    pais = models.CharField(max_length=100, blank=True, null=True)
+    nacimiento = models.DateField(blank=True, null=True)
+    ideal_personal = models.TextField(blank=True, null=True)
+    reafirmar = models.TextField(blank=True, null=True)
+    liberar = models.TextField(blank=True, null=True)
+    adquirir = models.TextField(blank=True, null=True)
     
-class PropositoParticular(models.Model):
-    usuario = models.ForeignKey(User,related_name='pparticulares' )   
-    mes_ano = models.DateField()
-    nombre = models.TextField()
-    
+
+
     def __unicode__(self):
-        return unicode(self.nombre) 
-    
-    
+        return unicode(self.user) 
+
+
+
+
+

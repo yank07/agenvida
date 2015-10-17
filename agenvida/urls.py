@@ -38,23 +38,28 @@ url(r'^auth/', include('rest_framework_social_oauth2.urls')),
 
 
     
-    url(r'^propositos2/$', views.PropositoList.as_view()),
-    url(r'^propositos2/(?P<pk>[0-9]+)/$', views.PropositoDetail.as_view()),
+    url(r'^propositos/$', views.PropositoList.as_view()),
+    url(r'^propositos/(?P<pk>[0-9]+)/$', views.PropositoDetail.as_view()),
 
 
-        url(r'^marcaciones2/$', views.MarcacionList.as_view()),
-    url(r'^marcaciones2/(?P<pk>[0-9]+)/$', views.MarcacionDetail.as_view()),
+
+        url(r'^marcaciones/$', views.MarcacionList.as_view()),
+    url(r'^marcaciones/(?P<pk>[0-9]+)/$', views.MarcacionDetail.as_view()),
  
 
 
- url(r'^usuarios2/$', views.UserList.as_view()),
+ url(r'^usuarios/$', views.UserList.as_view()),
+
+   url(r'^userProfile/$', views.UserPerfilDetail.as_view()),
+
+ 
     
    
 
     url(r'^users/$', UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', UserDetail.as_view()),
 
-     url(r'^auth/', include('djoser.urls')),
+  
 ]
 
 

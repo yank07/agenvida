@@ -14,10 +14,10 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 
 
-from mainApp.models import Proposito, Vinculacion, Marcacion
+from mainApp.models import Proposito, Vinculacion, Marcacion, UserPerfil
 from mainApp.permissions import IsOwnerOrReadOnly
 
-from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer
+from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer, UserPerfilSerializer
 
 from django.contrib.auth.models import User
 
@@ -88,6 +88,9 @@ class PropositoDetail(APIView):
         self.check_object_permissions(request, proposito)
         proposito.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
 ##########################################
 ############ MARCACION API ###############
 #############################################
@@ -150,6 +153,11 @@ class MarcacionList(APIView):
         serializer.save(usuario=self.request.user)
 
 
+###################################################
+##########USER######################################
+####################################################
+
+
 class UserList(APIView):
     """
     List all usuarios, or create a new marcacion.
@@ -170,4 +178,44 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def perform_create(self, serializer):
         serializer.save()
+
+
+
+
+
+
+class UserPerfilDetail(APIView):
+    """
+    Retrieve, update or delete a proposito instance.
+    """
+    permission_classes = (permissions.IsAuthenticated,)
+    def get_object(self, user):
+        try:
+            obj = UserPerfil.objects.get(user = user)
+        except UserPerfil.DoesNotExist:       
+             obj = UserPerfil.objects.create(user = user)
+             print "Cree el usuario"
+       
+        return obj
+
+
+    def get(self, request, format=None):
+        userProfile = self.get_object(user = request.user)
+        self.check_object_permissions(request, userProfile)
+        serializer = UserPerfilSerializer(userProfile)        
+        return Response(serializer.data)
+        
+
+    def put(self, request, format=None):
+        userProfile = self.get_object( request.user)
+        self.check_object_permissions(request, userProfile)
+        serializer = UserPerfilSerializer(userProfile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+  
+
+
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Vinculacion, Proposito, Marcacion
+from .models import Vinculacion, Proposito, Marcacion, UserPerfil
 from django.contrib.auth.models import User
  
 
@@ -10,6 +10,13 @@ class MarcacionSerializer(serializers.ModelSerializer):
 
         fields = ('id', 'dia', 'cumplimiento', 'proposito')
 
+
+class UserPerfilSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserPerfil
+        #usuario = serializers.ReadOnlyField(source='usuario.username')
+
+        fields = ('nacimiento', 'pais', 'ideal_personal','reafirmar', 'liberar', 'adquirir')
 
 
 class PropositoSerializer(serializers.ModelSerializer):
@@ -26,12 +33,14 @@ class PropositoSerializer(serializers.ModelSerializer):
 
 
 
+
+
  
  
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('password', 'first_name', 'last_name', 'email','username')
+        fields = ('id', 'first_name', 'last_name', 'email','username')
         write_only_fields = ('password',)
         read_only_fields = ('is_staff', 'is_superuser', 'is_active', 'date_joined',)
  
@@ -45,4 +54,5 @@ class UserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
+        userprofile = UserPerfil(user = user);
         return user
