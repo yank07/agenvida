@@ -198,6 +198,25 @@ class UserList(APIView):
     def perform_create(self, serializer):
         serializer.save()
 
+class UserCreate(APIView):
+    """
+    List all usuarios, or create a new marcacion.
+    """
+  #  permission_classes = (permissions.IsAuthenticated,)
+   
+
+    def post(self, request, format=None):
+        serializer = UserSerializer(data=request.data)
+       ## self.check_permissions(request)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    def perform_create(self, serializer):
+        serializer.save()
+
 
 
 
