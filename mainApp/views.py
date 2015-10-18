@@ -17,7 +17,7 @@ from rest_framework import permissions
 from mainApp.models import Proposito, Vinculacion, Marcacion, UserPerfil
 from mainApp.permissions import IsOwnerOrReadOnly
 
-from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer, UserPerfilSerializer
+from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer, UserPerfilSerializer, UserCreateSerializer
 
 from django.contrib.auth.models import User
 
@@ -206,7 +206,7 @@ class UserCreate(APIView):
    
 
     def post(self, request, format=None):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserCreateSerializer(data=request.data)
        ## self.check_permissions(request)
         if serializer.is_valid():
             serializer.save()
