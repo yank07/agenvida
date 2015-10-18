@@ -165,16 +165,16 @@ class UserList(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     def get_object(self, user):
         try:
-            obj = User.objects.get(user = user)
+            obj = User.objects.get( id = user.id)
         except User.DoesNotExist:       
-             obj = User.objects.create(user = user)
+             obj = User.objects.create( user)
             
        
         return obj
 
     def get(self, request, format=None):
-        users = User.objects.filter(id=request.user.id)
-        serializer = UserSerializer(users, many=True)
+        users = self.get_object(request.user)
+        serializer = UserSerializer(users)
         self.check_object_permissions(request, users)
         return Response(serializer.data)
 
