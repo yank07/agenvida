@@ -39,6 +39,7 @@ class UsersAdmin(UserAdmin):
 class VinculacionAdmin(admin.ModelAdmin):
     fields = ('vinculacion')
 
+UserAdmin.list_display += ('last_login','date_joined',)  # don't forget the commas
 
 
 admin.site.register(Vinculacion)
