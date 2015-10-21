@@ -18,6 +18,8 @@ agenvidaApp.controller('ResetPassCtrl',
 
 						if ($scope.pass.dos == $scope.pass.uno) {
 
+							$scope.data.new_password = $scope.pass.dos;
+
 							console.log($scope.data);
 							$http.post('/auth/password/reset/confirm/',$scope.data).then(
 								function(result){
