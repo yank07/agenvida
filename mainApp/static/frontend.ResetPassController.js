@@ -6,9 +6,10 @@ agenvidaApp.controller('ResetPassCtrl',
 			$scope.data = {}
 
 			$scope.path = window.location.pathname.split('/')
-			$scope.data.uid = $scope.path[2];
-			$scope.data.token =  $scope.path[3];
-			$scope.data.new_password = "hola09";
+			$scope.data.uid = $scope.path[4];
+			$scope.data.token =  $scope.path[5];
+			console.log($scope.data);
+		
 			$scope.mensajeShow = false;
 
 
