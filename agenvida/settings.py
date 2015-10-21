@@ -171,8 +171,8 @@ LOGIN_REDIRECT_URL = '/'
 DJOSER = {
     'DOMAIN': 'agenvida.herokuapp.com',
     'SITE_NAME': 'Agenvida',
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
 }
 

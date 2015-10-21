@@ -80,7 +80,8 @@ urlpatterns += [
 
 
 urlpatterns += [
-url(r'^$',   TemplateView.as_view(template_name='base.html'), name="base"),
+url(r'^$',   TemplateView.as_view(template_name='main.html'), name="base"),
+url(r'^password/reset/confirm/',   TemplateView.as_view(template_name='reset-password.html')),
 
 ]
 

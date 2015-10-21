@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ui centered grid">
+  <div class="eight wide computer fourteen wide mobile tablet column centered ">
+        <h1>Agenvida 2.0 <a href="{% url 'social:begin' 'facebook-oauth2' %}">Entrar con la cuenta de Google</a> </h1>
+
+
+
+           <div class="ui form">
+                               
+                  <div class=" fields">
+                              <div class="ui buttons four wide field" >
+                                  <button class="ui  icon button " ng-click="dia = dia - 1"    >
+                                    <i class="left chevron icon"></i>                 
+                                  </button>
+                                  <button class="ui floating   button" >
+                                    
+
+                                    {$ dia $}                                
+
+                                           
+                                     
+                                            
+                                  </button>
+
+                                  <button class="ui  icon button" ng-click="dia = dia + 1"     >
+                                    
+                                    <i class="right chevron icon"></i>
+                                  </button>
+                              </div>
+
+                              <div class="four wide field">
+                                <select class="ui fluid  " name="singleSelect" id="singleSelect" ng-model="mes" ng-change="change()">
+                                  <option value="">Month</option>
+                                  <option value="01">January</option>
+                                  <option value="02">February</option>
+                                  <option value="03">March</option>
+                                  <option value="04">April</option>
+                                  <option value="05">May</option>
+                                  <option value="06">June</option>
+                                  <option value="07">July</option>
+                                  <option value="08">August</option>
+                                  <option value="09">September</option>
+                                  <option value="10">October</option>
+                                  <option value="11">November</option>
+                                  <option value="12">December</option>
+                                </select>
+                            </div>
+
+                            <div class="four wide field">
+                                <select class="ui fluid" name="anoSelect" id="anoSelect" ng-model="ano" >
+                                  <option value="">Año</option>
+                                  <option value="2014">2014</option>
+                                  <option value="2015">2015</option>
+                                  <option value="2016">2016</option>
+                                  <option value="2017">2017</option>
+
+
+
+                                </select>
+
+
+                            </div>
+
+                            <div class="two wide field">
+
+                              <button class="ui icon button ">
+                                
+                                <i class="calendar icon"></i>
+                              </button>
+                            </div>
+
+
+
+  
+                            
+                  </div>
+           </div> 
+
+
+
+    
+
+           
+
+            <div class="ui accordion">
+
+              <vinculacion ng-repeat="vinculacion in vinculaciones">
+              <div class="title">
+                <i class="dropdown icon"></i>
+                {$ vinculacion.nombre$}
+              </div>
+              <div class="content">
+                <ul class="transition propositos hidden">
+
+                  <li  ng-repeat="proposito in filtered =(propositos | filter:{ vinculacion: vinculacion.id , mes_ano: ano + '-'+ mes +'-' , }) " class="proposito">
+
+
+                     
+                      <div class="ui grid"> 
+
+                        <h2 class="titulo" lass = "left floated six wide column"> {$proposito.proposito$}  </h2>
+
+
+
+                            <!-- BOTONES CUANDO YA HAY MARCACION-->
+                            <div  class = "right floated four wide column" >
+                              <button class="ui circular mini icon button" ng-class="{'green' : (proposito.marcaciones | filter:{ dia: dia, cumplimiento: 1 }).length != 0 } "  ng-click="call(proposito, 1 )" >
+                                <i class="add icon"></i>
+                              </button>
+                              <button class="ui circular mini icon button" ng-class="{'red' : (proposito.marcaciones | filter:{ dia: dia, cumplimiento: 2 }).length != 0 } "  ng-click="call(proposito, 2 )" >
+                                <i class="minus icon"></i>
+                              </button>
+                              <button class="ui circular mini icon button" ng-class="{'blue' : (proposito.marcaciones | filter:{ dia: dia, cumplimiento: 0 }).length != 0 } "  ng-click="call(proposito, 0 )">
+                                <i class="radi icon"></i>
+                              </button>                             
+                            </div>
+
+
+
+                   
+                             
+
+                      </div>
+        
+                    </li>
+
+                    <!-- UNA ENTRADA NUEVA -->
+
+                    <li ng-hide="showInput[vinculacion.id]" class="inputProposito">
+
+                    <form class="ui form" ng-submit="submitNuevoProposito(vinculacion.id)">
+
+                      <div class="ui transparent massive icon input">
+                        <input type="text" placeholder="Nuevo Proposito" ng-model="NuevoProposito[vinculacion.id]">
+                        <i class="add link icon" ng-click="submitNuevoProposito(vinculacion.id)"></i>
+                      </div>
+
+                    </form>
+                    </li>
+
+                    <!-- BOTON PARA  ENTRADA NUEVA -->
+                    <li>
+
+                      <button class="ui circular mini icon button addProposito"  ng-click="addPropositoInput(vinculacion.id)">
+                                <i class="add icon"></i>
+                      </button>
+
+                    </li> 
+
+
+                </ul>
+              </div>
+
+            </vinculacion>
+
+
+            </div>
+<!-- END Accordion -->
+
+
+
+    </div>
+</div>
+    {% endblock content %}
