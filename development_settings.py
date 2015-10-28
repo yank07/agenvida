@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'rest_framework_social_oauth2', #TOKEN SOCIAL
     'corsheaders', #Permite post de otros dominios
     'djoser', # Rest authentication
+    'portada',
     
 
 
