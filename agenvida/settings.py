@@ -67,10 +67,10 @@ MIDDLEWARE_CLASSES = (
 # Esto sirve para que pueda hacer consultas desde otro dominio
 CORS_ORIGIN_REGEX_WHITELIST = ('^http://localhost:8100$', )
 CORS_ALLOW_CREDENTIALS = True
-OAUTH_EXPIRE_DELTA = datetime.timedelta(days=365) # 100.000 horas;
+OAUTH_EXPIRE_DELTA = datetime.timedelta(seconds=20000) # 100.000 horas;
 OAUTH_EXPIRE_CODE_DELTA = datetime.timedelta(seconds=10*60)
-ACCESS_TOKEN_EXPIRE_SECONDS = 15552000
-AUTHORIZATION_CODE_EXPIRE_SECONDS = 15552000
+ACCESS_TOKEN_EXPIRE_SECONDS = datetime.timedelta(seconds=30000)
+AUTHORIZATION_CODE_EXPIRE_SECONDS = datetime.timedelta(seconds=15000)
 
 
 
