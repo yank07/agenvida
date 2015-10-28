@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'corsheaders', #Permite post de otros dominios
     'djoser', #Para crear usuarios y para si olvido su contrasenha
     'portada',
+    'import_export',#para exportar los datos en CSV
    
 
 )

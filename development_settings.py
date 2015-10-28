@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'corsheaders', #Permite post de otros dominios
     'djoser', # Rest authentication
     'portada',
+    'import_export',#para exportar los datos en CSV
     
 
 
@@ -193,6 +194,9 @@ DJOSER = {
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'agenvida@gmail.com'
-EMAIL_HOST_PASSWORD = 'horarioespiritual123'
+EMAIL_HOST_PASSWORD = '*******'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+

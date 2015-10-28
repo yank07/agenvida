@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
+from import_export.admin import ImportExportModelAdmin, ExportMixin
+from import_export import resources
 # Register your models here.
 
 # Register your models here.
@@ -53,6 +54,23 @@ admin.site.unregister(User)
 admin.site.register(User, UsersAdmin )
 admin.site.register(Marcacion)
 
+class UserResource(resources.ModelResource):
+    #fields = ('username', 'first_name', 'last_login')
+    #inlines = (UserPerfilAdmin, )
+    #list_display = ( "username", "first_name", "last_login")
+
+    class Meta:
+        model = User
+        export_order = ('username', 'first_name', 'last_name', 'email', 'date_joined','last_login')
+
+
+class UserAdmin(ExportMixin, UserAdmin ):
+    resource_class = UserResource
+    pass
+
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 
 
 

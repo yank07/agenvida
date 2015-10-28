@@ -24,3 +24,4 @@ six==1.9.0
 static==0.4
 static3==0.6.1
 wsgiref==0.1.2
+django-import-export==0.2.8
