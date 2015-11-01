@@ -265,7 +265,7 @@ class OracionList(APIView):
     """
     #permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly)
     def get(self, request, format=None):
-        oraciones = Oracion.objects.all()
+        oraciones = Oracion.objects.all().order_by('nombre')
         serializer = OracionListSerializer(oraciones, many=True)
         self.check_object_permissions(request, oraciones)
         return Response(serializer.data)
