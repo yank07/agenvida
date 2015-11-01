@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'djoser', #Para crear usuarios y para si olvido su contrasenha
     'portada',
     'import_export',#para exportar los datos en CSV
+       'django_wysiwyg',# Texto enriquecido
+    'ckeditor', # Editor de texto enrquiquecido
    
 
 )

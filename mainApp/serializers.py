@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Vinculacion, Proposito, Marcacion, UserPerfil
+from .models import Vinculacion, Proposito, Marcacion, UserPerfil , Oracion
 from django.contrib.auth.models import User
  
 
@@ -76,3 +76,16 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user.save()
         userprofile = UserPerfil(user = user);
         return user
+
+
+
+class OracionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Oracion
+        fields = ('nombre', 'contenido')
+
+class OracionListSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Oracion
+        fields = ('id','nombre',)
+

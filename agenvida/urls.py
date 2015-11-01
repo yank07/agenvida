@@ -41,6 +41,10 @@ url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^propositos/$', views.PropositoList.as_view()),
     url(r'^propositos/(?P<pk>[0-9]+)/$', views.PropositoDetail.as_view()),
 
+        url(r'^oraciones/$', views.OracionList.as_view()),
+    url(r'^oraciones/(?P<pk>[0-9]+)/$', views.OracionDetail.as_view()),
+
+
 
 
         url(r'^marcaciones/$', views.MarcacionList.as_view()),

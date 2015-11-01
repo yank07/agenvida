@@ -47,6 +47,8 @@ INSTALLED_APPS = (
     'djoser', # Rest authentication
     'portada',
     'import_export',#para exportar los datos en CSV
+    'django_wysiwyg',# Texto enriquecido
+    'ckeditor', # Editor de texto enrquiquecido
     
 
 
@@ -65,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
@@ -198,5 +201,8 @@ EMAIL_HOST_PASSWORD = '*******'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+## RICH TEXT
 
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'

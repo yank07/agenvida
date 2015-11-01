@@ -5,6 +5,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from ckeditor.fields import RichTextField
+
 
     
 class Vinculacion(models.Model):
@@ -20,12 +22,11 @@ class Proposito(models.Model):
     proposito = models.TextField()
     
     def __unicode__(self):
-        return unicode(self.proposito)
+        return '%s' % unicode(self.proposito)
     
 class Marcacion(models.Model):
     usuario = models.ForeignKey(User, related_name='marcaciones')
-    proposito = models.ForeignKey(Proposito,related_name='marcaciones' )
-    
+    proposito = models.ForeignKey(Proposito,related_name='marcaciones' )    
     dia = models.DateField()
     cumplimiento = models.IntegerField()
    
@@ -39,12 +40,14 @@ class Tipo_marcacion(models.Model):
     RangoInf = models.IntegerField()
     
     def __unicode__(self):
-        return unicode(self.tipo)
-    
+        return '%s' % unicode(self.tipo)
 
 
-
-
+class Oracion (models.Model):
+    nombre = models.CharField(max_length=50)
+    contenido = RichTextField()
+    def __unicode__(self):
+        return '%s' % unicode(self.nombre)
 
 
 
@@ -60,7 +63,7 @@ class UserPerfil(models.Model):
 
 
     def __unicode__(self):
-        return unicode(self.user) 
+        return '%s' % unicode(self.user)
 
 
 

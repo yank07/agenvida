@@ -14,10 +14,10 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 
 
-from mainApp.models import Proposito, Vinculacion, Marcacion, UserPerfil
+from mainApp.models import Proposito, Vinculacion, Marcacion, UserPerfil, Oracion
 from mainApp.permissions import IsOwnerOrReadOnly
 
-from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer, UserPerfilSerializer, UserCreateSerializer
+from mainApp.serializers import PropositoSerializer, MarcacionSerializer, UserSerializer, UserPerfilSerializer, UserCreateSerializer, OracionSerializer, OracionListSerializer
 
 from django.contrib.auth.models import User
 
@@ -255,5 +255,43 @@ class UserPerfilDetail(APIView):
 
   
 
+##########################################
+############ ORACION API ###############
+#############################################
 
+class OracionList(APIView):
+    """
+    List all oraciones, or create a new oracion.
+    """
+    #permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly)
+    def get(self, request, format=None):
+        oraciones = Oracion.objects.all()
+        serializer = OracionListSerializer(oraciones, many=True)
+        self.check_object_permissions(request, oraciones)
+        return Response(serializer.data)
+
+
+
+
+class OracionDetail(APIView):
+    """
+    Retrieve, update or delete a oracion instance.
+    """
+    #permission_classes = (permissions.IsAuthenticated,IsOwnerOrReadOnly)
+    def get_object(self, pk):
+        try:
+            obj = Oracion.objects.get(pk=pk)
+        except Oracions.DoesNotExist:
+            raise Http404
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+
+    def get(self, request, pk, format=None):
+        oracion = self.get_object(pk)
+        serializer = OracionSerializer(oracion)        
+        return Response(serializer.data)
+        
+
+   
 
