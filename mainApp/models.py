@@ -54,6 +54,7 @@ class Oracion (models.Model):
 class UserPerfil(models.Model):
     user = models.OneToOneField(User)
     pais = models.CharField(max_length=100, blank=True, null=True)
+    idioma = models.CharField(max_length=100, blank=True, null=True)
     nacimiento = models.DateField(blank=True, null=True)
     ideal_personal = models.TextField(blank=True, null=True)
     reafirmar = models.TextField(blank=True, null=True)

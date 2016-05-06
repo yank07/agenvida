@@ -16,7 +16,7 @@ class UserPerfilSerializer(serializers.ModelSerializer):
         model = UserPerfil
         #usuario = serializers.ReadOnlyField(source='usuario.username')
 
-        fields = ('nacimiento', 'pais', 'ideal_personal','reafirmar', 'liberar', 'adquirir')
+        fields = ('nacimiento', 'pais', 'ideal_personal','reafirmar', 'liberar', 'adquirir', , 'idioma')
 
 
 class PropositoSerializer(serializers.ModelSerializer):
