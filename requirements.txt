@@ -29,4 +29,4 @@ six==1.9.0
 static==0.4
 static3==0.6.1
 tablib==0.10.0
-wsgiref==0.1.2
+
