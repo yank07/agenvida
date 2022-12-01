@@ -16,7 +16,7 @@ django-registration==1.0
 django-rest-framework-social-oauth2==1.0.2
 django-toolbelt==0.0.1
 django-wysiwyg==0.7.1
-djangorestframework==3.2.4
+djangorestframework==3.11.2
 djoser==0.4.0
 gunicorn==19.1.1
 oauthlib==1.0.1
