@@ -5,6 +5,7 @@ argparse==1.2.1
 diff-match-patch==20121119
 dj-database-url==0.3.0
 dj-static==0.0.6
+setuptools==58.0.0
 django-braces==1.8.1
 django-ckeditor==5.0.2
 django-cors-headers==1.1.0
