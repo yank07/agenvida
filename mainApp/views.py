@@ -60,12 +60,12 @@ class PropositoDetail(APIView):
     """
     permission_classes = (permissions.IsAuthenticated,IsOwnerOrReadOnly)
     def get_object(self, pk):
-	try:
-		obj = Proposito.objects.get(pk=pk)
-	except Propositos.DoesNotExist:
-		raise Http404
-	self.check_object_permissions(self.request, obj)
-	return obj
+        try:
+            obj = Proposito.objects.get(pk=pk)
+        except Propositos.DoesNotExist:
+            raise Http404
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
     def get(self, request, pk, format=None):
