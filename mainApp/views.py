@@ -232,7 +232,7 @@ class UserPerfilDetail(APIView):
             obj = UserPerfil.objects.get(user = user)
         except UserPerfil.DoesNotExist:       
              obj = UserPerfil.objects.create(user = user)
-             print "Cree el usuario"
+             
        
         return obj
 
